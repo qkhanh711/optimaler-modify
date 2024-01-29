@@ -31,4 +31,6 @@ if RAY:
 
 else:
     for seed in range(args.n_run):
+        print(f"Run {seed}"
+              f" with setting {args.setting}")
         run_train.main(args.setting, seed)

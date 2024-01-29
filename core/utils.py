@@ -29,8 +29,11 @@ def get_objects(setting_path):
     Get objects from configuration file
     '''
     path, setting_name = get_path_and_file(setting_path)
+    print(f"PATH: {path}")
+    print(f"SETTING NAME: {setting_name}")
     import_obj = __import__(path, fromlist=[setting_name])
     cfg = getattr(import_obj, setting_name).cfg
+    print(f"CFG: {cfg}")
     clip_op = CLIPS[cfg.distribution_type]
     generator = GENERATORS[cfg.distribution_type]
     return cfg, clip_op, generator, setting_name

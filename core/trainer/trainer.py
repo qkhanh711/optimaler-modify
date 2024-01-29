@@ -316,7 +316,7 @@ class Trainer(object):
         self.misreport_cycle(x)
 
         # Save found best misreport values in data generator
-        if self.config.train.data is "fixed" and self.config.train.adv_reuse:
+        if self.config.train.data == "fixed" and self.config.train.adv_reuse:
             self.train_gen.update_adv(perm, self.adv_var["train"].data.cpu())
 
         # Make a step for net weights updating
@@ -433,7 +433,7 @@ class DistillationTrainer(Trainer):
             self.misreport_cycle(x)
 
             # Save found best misreport values in data generator
-            if self.config.train.data is "fixed" and self.config.train.adv_reuse:
+            if self.config.train.data == "fixed" and self.config.train.adv_reuse:
                 self.train_gen.update_adv(perm, self.adv_var["train"].data.cpu())
 
         # Make a step for net weights updating

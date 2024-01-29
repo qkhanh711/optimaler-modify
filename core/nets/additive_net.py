@@ -19,7 +19,7 @@ class AdditiveNet(nn.Module):
         self.create_payment_layers()
 
     def create_constants(self):
-        if self.config.net.init is "None":
+        if self.config.net.init == "None":
             init = None
         elif self.config.net.init == "gu":
             init = nn.init.xavier_uniform_
