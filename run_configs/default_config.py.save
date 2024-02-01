@@ -9,10 +9,10 @@ cfg = __C
 __C.regret_type = "standard"
 
 # Type of net - RegretNet, RegretFormer or EquivariantNet
-__C.architecture = "RegretNet"
+__C.architecture = "RegretFormer"
 
 # Bid distribution
-__C.distribution_type = "uniform_23"
+__C.distribution_type = "uniform_01"
 __C.min = 0
 __C.max = 1
 

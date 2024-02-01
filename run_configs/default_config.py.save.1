@@ -9,10 +9,10 @@ cfg = __C
 __C.regret_type = "standard"
 
 # Type of net - RegretNet, RegretFormer or EquivariantNet
-__C.architecture = "RegretNet"
+__C.architecture = "RegretFormer"
 
 # Bid distribution
-__C.distribution_type = "uniform_23"
+__C.distribution_type = "uniform_01"
 __C.min = 0
 __C.max = 1
 
@@ -126,4 +126,5 @@ __C.val.data = "online"
 
 # Compute number of samples
 __C.train.num_instances = __C.train.num_batches * __C.train.batch_size
-__C.val.num_instances = __C.val.num_batches * __C.val.batch_size
+__C.val.num_insta 	
+nces = __C.val.num_batches * __C.val.batch_size

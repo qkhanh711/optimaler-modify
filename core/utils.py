@@ -10,12 +10,16 @@ from core.data import *
 
 CLIPS = {
     'uniform_01': lambda x: clip_op_01(x),
+    'uniform_12': lambda x: clip_op_12(x),
+    'uniform_23': lambda x: clip_op_23(x),
     'uniform_416_47': lambda x: clip_op_416_47(x)
 }
 
 GENERATORS = {
     'uniform_01': uniform_01_generator.Generator,
-    'uniform_416_47': uniform_416_47_generator.Generator
+    'uniform_416_47': uniform_416_47_generator.Generator,
+    # 'uniform_12': uniform_12_generator.Generator,
+    'uniform_23': uniform_23_generator.Generator
 }
 
 
@@ -35,7 +39,10 @@ def get_objects(setting_path):
     cfg = getattr(import_obj, setting_name).cfg
     print(f"CFG: {cfg}")
     clip_op = CLIPS[cfg.distribution_type]
+    print(f"CLIP OP: {clip_op}")
     generator = GENERATORS[cfg.distribution_type]
+    print(f"GENERATOR: {generator}")
+    print()
     return cfg, clip_op, generator, setting_name
 
 
