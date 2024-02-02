@@ -11,15 +11,7 @@ class Generator(BaseGenerator):
         self.build_generator(X=X, ADV=ADV)
 
     def generate_random_X(self, shape):
-        X = np.zeros(shape)
-        size = (shape[0], shape[1])
-        X[:, :, 0] = np.random.uniform(2,3, size=size)
-        X[:, :, 1] = np.random.uniform(2,3, size=size)
-        return X
+        return np.random.uniform(2,3, shape)
 
     def generate_random_ADV(self, shape):
-        X = np.zeros(shape)
-        size = (shape[0], shape[1], shape[2])
-        X[:, :, :, 0] = np.random.uniform(2,3, size=size)
-        X[:, :, :, 1] = np.random.uniform(2,3, size=size)
-        return X
+        return np.random.uniform(2,3, shape)

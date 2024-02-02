@@ -13,8 +13,8 @@ __C.architecture = "RegretNet"
 
 # Bid distribution
 __C.distribution_type = "uniform_23"
-__C.min = 0
-__C.max = 1
+__C.min = 2
+__C.max = 3
 
 # Auction params
 __C.num_agents = 2
