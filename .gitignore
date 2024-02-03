@@ -2,3 +2,4 @@
 *.pyc
 *.DS_store
 runs/
+__pycache__/

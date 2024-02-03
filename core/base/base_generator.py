@@ -14,8 +14,8 @@ class BaseGenerator(object):
         self.batch_size = config[self.mode].batch_size
 
     def build_generator(self, X=None, ADV=None):
-        if self.mode is "train":
-            if self.config.train.data is "fixed":
+        if self.mode == "train":
+            if self.config.train.data == "fixed":
                 self.get_data(X, ADV)
                 # if self.config.train.restore_iter == 0:
                 #     self.get_data(X, ADV)
@@ -26,7 +26,7 @@ class BaseGenerator(object):
                 self.gen_func = self.gen_online()
 
         else:
-            if self.config[self.mode].data is "fixed" or X is not None:
+            if self.config[self.mode].data == "fixed" or X is not None:
                 self.get_data(X, ADV)
                 self.gen_func = self.gen_fixed()
             else:
@@ -62,7 +62,7 @@ class BaseGenerator(object):
 
     def gen_fixed(self):
         i = 0
-        if self.mode is "train":
+        if self.mode == "train":
             perm = np.random.permutation(self.num_instances)
         else:
             perm = np.arange(self.num_instances)
