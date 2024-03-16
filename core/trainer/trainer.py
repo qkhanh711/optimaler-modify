@@ -267,6 +267,12 @@ class Trainer(object):
         return x_mis, misreports
 
     def train(self, generator):
+        results = {
+            "revenue": [],
+            "regret": [],
+            "loss": [],
+            "w_rgt": [],
+        } 
         """
         Main function, full train process
         """
@@ -285,7 +291,11 @@ class Trainer(object):
 
         while iteration < (self.config.train.max_iter):
             tic = time.time()
-            self.train_epoch(iteration)
+            train_revenue, train_regret, net_loss, self.w_rgt = self.train_epoch(iteration)
+            results["revenue"].append(train_revenue.detach().cpu().numpy().item())
+            results["regret"].append(train_regret.detach().cpu().numpy().item())
+            results["loss"].append(net_loss.detach().cpu().numpy().item())
+            results["w_rgt"].append(self.w_rgt)
 
             toc = time.time()
             time_elapsed += toc - tic
@@ -299,6 +309,11 @@ class Trainer(object):
             # Validation
             if (iteration % self.config.val.print_iter) == 0:
                 self.eval(iteration)
+        saved_model_path = self.writer.log_dir + "/model_result_{}_{}x{}_{}".format(iteration, self.config.num_agents, self.config.num_items, self.config.train.rgt_target_end)
+        print("Saving model to {}".format(saved_model_path))
+        with open(saved_model_path, 'w') as f:
+            json.dump(results, f)
+            
 
     def train_epoch(self, iteration):
         self.mode = "train"
@@ -338,6 +353,7 @@ class Trainer(object):
             self.writer.add_scalar("Train/regret", train_regret, iteration / 1000)
             self.writer.add_scalar("Train/loss", net_loss, iteration / 1000)
             self.writer.add_scalar("Train/w_rgt", self.w_rgt, iteration / 1000)
+        return train_revenue, train_regret, net_loss, self.w_rgt  
 
     def eval(self, iteration):
         print("Validation on {} iteration".format(iteration))

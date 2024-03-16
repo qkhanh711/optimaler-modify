@@ -2,4 +2,6 @@
 *.pyc
 *.DS_store
 runs/
+runs_RegretNet/
+runs_RegretFormer/
 __pycache__/

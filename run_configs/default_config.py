@@ -1,3 +1,4 @@
+
 from easydict import EasyDict as edict
 
 __C = edict()
@@ -12,17 +13,18 @@ __C.regret_type = "standard"
 __C.architecture = "RegretNet"
 
 # Bid distribution
-__C.distribution_type = "uniform_23"
+__C.distribution_type = "uniform_01"
 __C.min = 2
 __C.max = 3
 
 # Auction params
-__C.num_agents = 2
-__C.num_items = 5
+
+__C.num_agents = 5 # bidders
+__C.num_items = 3 # items
+
 
 # Save data for restore.
-__C.save_data = "runs"
-
+__C.save_data = "runs_" + __C.architecture
 # Plots
 __C.plot = edict()
 __C.plot.bool = False
@@ -44,8 +46,8 @@ __C.net.activation = "tanh"
 __C.net.num_a_layers = 3
 __C.net.num_p_layers = 3
 # num_p_hidden_units, num_p_hidden_units - number of hidden units, [a - alloc, p - pay]
-__C.net.num_p_hidden_units = 100
-__C.net.num_a_hidden_units = 100
+__C.net.num_p_hidden_units = 20
+__C.net.num_a_hidden_units = 20
 __C.net.layer_norm = False
 
 # RegretFormer parameters
@@ -72,9 +74,9 @@ __C.train.seed = 42
 # training form restore_iter [needs saved model]
 __C.train.restore_iter = 0
 # max iters to train
-__C.train.max_iter = 200000
+__C.train.max_iter = 3000
 # Learning rate of network param updates
-__C.train.learning_rate = 1e-3
+__C.train.learning_rate = 0.001
 
 """ Train-data params """
 # Choose between fixed and online. If online, set adv_reuse to False
@@ -97,15 +99,15 @@ __C.train.gd_lr_step = 1
 
 """ Lagrange Optimization params """
 __C.train.w_rgt_init_val = 1
-__C.train.rgt_target_start = 0.01
-__C.train.rgt_target_end = 0.001
+__C.train.rgt_target_start = 0.001
+__C.train.rgt_target_end = 0.0001
 __C.train.rgt_lr = 0.5
 
 """ train summary and save params"""
 # Frequency at which models are saved
-__C.train.save_iter = 100000
+__C.train.save_iter = 1500
 # Train stats print frequency
-__C.train.print_iter = 1000
+__C.train.print_iter = 25
 
 """ Validation params """
 __C.val = edict()
@@ -120,7 +122,7 @@ __C.val.gd_lr_step = 1
 __C.val.num_batches = 128
 __C.val.batch_size = 32
 # Frequency at which validation is performed
-__C.val.print_iter = 25000
+__C.val.print_iter = 750
 # Validation data frequency
 __C.val.data = "online"
 
