@@ -280,6 +280,7 @@ class Trainer(object):
         self.train_gen, self.val_gen = generator
 
         iteration = self.config.train.restore_iter
+        self.train_gen.save_data(iteration)
 
         # Load save model
         if iteration > 0:
@@ -308,6 +309,8 @@ class Trainer(object):
 
             # Validation
             if (iteration % self.config.val.print_iter) == 0:
+                self.train_gen.save_data(iteration)
+                self.val_gen.save_data(iteration)
                 self.eval(iteration)
         saved_model_path = self.writer.log_dir + "/model_result_{}_{}x{}_{}".format(iteration, self.config.num_agents, self.config.num_items, self.config.train.rgt_target_end)
         print("Saving model to {}".format(saved_model_path))
@@ -340,6 +343,7 @@ class Trainer(object):
         self.rgt_target = max(self.rgt_target * self.rgt_target_mult, self.config.train.rgt_target_end)
 
         if (iteration % self.config.train.print_iter) == 0:
+            self.train_gen.save_data(iteration)
             print("Iteration {}".format(iteration))
             print(
                 "Train revenue: {},   regret: {},   net loss: {} , w: {}".format(
@@ -363,7 +367,7 @@ class Trainer(object):
         self.eval_grad(iteration)
 
         if self.config.plot.bool:
-            self.plot()
+            self.Trainer_plot()
 
     def eval_grad(self, iteration):
         val_revenue = 0
@@ -388,7 +392,7 @@ class Trainer(object):
         self.writer.add_scalar("Validation/revenue", val_revenue, iteration / 1000)
         self.writer.add_scalar("Validation/regret_grad", val_regret, iteration / 1000)
 
-    def plot(self):
+    def Trainer_plot(self):
         x = np.linspace(self.config.min, self.config.max, self.config.plot.n_points)
         y = x
         if self.config.setting == 'additive_1x2_uniform_416_47':

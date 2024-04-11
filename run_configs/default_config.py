@@ -3,7 +3,6 @@ from easydict import EasyDict as edict
 
 __C = edict()
 cfg = __C
-
 # 'standard' for DSIC with misreport estimation through gradient descent of inputs
 # 'distillation' for distilling a trained network onto a new network (for validation)
 # 'cross-val' for cross-validating trained networks (for validation)
@@ -25,6 +24,7 @@ __C.num_items = 3 # items
 
 # Save data for restore.
 __C.save_data = "runs_" + __C.architecture
+__C.dir_name  = __C.save_data
 # Plots
 __C.plot = edict()
 __C.plot.bool = False
@@ -74,7 +74,7 @@ __C.train.seed = 42
 # training form restore_iter [needs saved model]
 __C.train.restore_iter = 0
 # max iters to train
-__C.train.max_iter = 3000
+__C.train.max_iter = 750
 # Learning rate of network param updates
 __C.train.learning_rate = 0.001
 

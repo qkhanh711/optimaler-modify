@@ -10,6 +10,9 @@ class Generator(BaseGenerator):
         super(Generator, self).__init__(config, mode)
         self.build_generator(X=X, ADV=ADV)
 
+    def save_data(self, iter):
+        return super().save_data(iter)
+
     def generate_random_X(self, shape):
         return np.random.uniform(2,3, shape)
 

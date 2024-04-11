@@ -69,3 +69,4 @@ def main(setting, seed=0):
         raise NotImplementedError("This type of regret is not implemented")
 
     trainer.train(generators)
+    # trainer.Trainer_plot()

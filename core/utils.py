@@ -41,6 +41,7 @@ def get_objects(setting_path):
     clip_op = CLIPS[cfg.distribution_type]
     print(f"CLIP OP: {clip_op}")
     generator = GENERATORS[cfg.distribution_type]
+    # generator.save_data(iter =0)
     print(f"GENERATOR: {generator}")
     print()
     return cfg, clip_op, generator, setting_name

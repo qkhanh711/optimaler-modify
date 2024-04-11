@@ -2,7 +2,7 @@ import os
 
 import matplotlib.pyplot as plt
 import numpy as np
-
+import cv2
 
 def plot(alloc, dir_name, setting):
     if setting == "additive_1x2_uniform":
@@ -62,6 +62,7 @@ def plot_a_1x2_u(alloc, dir_name):
 
     fig.set_size_inches(4, 3)
     plt.savefig(os.path.join(dir_name, "alloc2.png"), bbox_inches="tight", pad_inches=0.05, dpi=200)
+    cv2.imwrite(os.path.join(dir_name, "alloc2.png"), img)
     plt.close(fig)
 
 

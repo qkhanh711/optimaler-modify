@@ -12,15 +12,17 @@ class BaseGenerator(object):
         self.num_instances = config[self.mode].num_batches * config[self.mode].batch_size
         self.num_misreports = config[self.mode].num_misreports
         self.batch_size = config[self.mode].batch_size
+        self.X = self.generate_random_X([self.num_instances, self.num_agents, self.num_items])
+        self.ADV = self.generate_random_ADV([self.num_misreports, self.num_instances, self.num_agents, self.num_items])
 
     def build_generator(self, X=None, ADV=None):
         if self.mode == "train":
             if self.config.train.data == "fixed":
                 self.get_data(X, ADV)
-                # if self.config.train.restore_iter == 0:
-                #     self.get_data(X, ADV)
-                # else:
-                #     self.load_data_from_file(self.config.train.restore_iter)
+                if self.config.train.restore_iter == 0:
+                    self.get_data(X, ADV)
+                else:
+                    self.load_data_from_file(self.config.train.restore_iter)
                 self.gen_func = self.gen_fixed()
             else:
                 self.gen_func = self.gen_online()
@@ -47,6 +49,8 @@ class BaseGenerator(object):
 
     def load_data_from_file(self, iter):
         """Loads data from disk"""
+        print("Loading data from disk")
+        print(os.path.join(self.config.dir_name, "X.npy"))
         self.X = np.load(os.path.join(self.config.dir_name, "X.npy"))
         self.ADV = np.load(os.path.join(self.config.dir_name, "ADV_" + str(iter) + ".npy"))
 
@@ -54,6 +58,7 @@ class BaseGenerator(object):
         """Saved data to disk"""
         if self.config.save_data is None:
             return
+            
 
         if iter == 0:
             np.save(os.path.join(self.config.dir_name, "X"), self.X)
@@ -97,3 +102,6 @@ class BaseGenerator(object):
     def generate_random_ADV(self, shape):
         """Rewrite this for new distributions"""
         raise NotImplementedError
+
+# if __name__ == "__main__":
+    # BaseGenerator().save_data(1)

@@ -3,8 +3,10 @@ import random
 import torch
 import torch.nn.functional as F
 
-from utility.efficient_allocation import oracle
-
+try:
+    from utility.efficient_allocation import oracle
+except:
+    from efficient_allocation import oracle
 
 def gen_valuations_normal(size: object, mean_of_mean: object = 10, std_of_mean: object = 1, mean_of_std: object = 2, std_of_std: object = 0.5) -> object:
     """

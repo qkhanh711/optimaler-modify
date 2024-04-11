@@ -3,9 +3,10 @@ import seaborn as sns
 from matplotlib import pyplot as plt
 from matplotlib.ticker import FuncFormatter
 import matplotlib
-
-from plots.colors import Neon
-
+try:
+    from plots.colors import Neon
+except:
+    from colors import Neon
 
 def plot_with_intervals(min_data, max_data, mean_data, \
     inds=None, label='RegretNet', y_lim=None, x_lim=200, c=Neon.RED.norm, lw=3, linestyle='-', dashes=None, ax=None):

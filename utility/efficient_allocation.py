@@ -90,7 +90,10 @@ def get_v_sum_but_i(v):
 
 
 if __name__ == "__main__":
-    from utility.data_generation import prepare_auctions
+    try:
+        from utility.data_generation import prepare_auctions
+    except:
+        from data_generation import prepare_auctions
 
     batch = torch.FloatTensor(
         [

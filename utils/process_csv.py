@@ -2,9 +2,14 @@ import pandas as pd
 from matplotlib import pyplot as plt
 import os
 import seaborn as sns
-from plots.colors import Neon
-from plots import plot_config
-
+import sys
+sys.path.append('../')
+try:
+    from plots.colors import Neon
+    from plots import plot_config
+except:
+    from plots.colors import Neon
+    import plots.plot_config as plot_config
 
 def plot_from_csv():
     for tag in TAGS:
