@@ -5,3 +5,5 @@ runs/
 runs_RegretNet/
 runs_RegretFormer/
 __pycache__/
+logs/
+*.npy
