@@ -12,7 +12,7 @@ class IrwinHall(rv_continuous):
     Irwin-hall is the distribution of sum of identical uniform random variables.
     """
 
-    def __init__(self, n=1, a=2, b=3):
+    def __init__(self, n=1, a=0, b=1.3):
         """
         :param n: number of summed uniform random variables
         :param a, b: left and right border of single uniform distribution

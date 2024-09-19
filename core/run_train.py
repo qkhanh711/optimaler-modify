@@ -13,7 +13,7 @@ def count_parameters(model):
 
 def main(setting, seed=0):
     device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
-    print(f"DEVICE: {device}")
+    # print(f"DEVICE: {device}")
 
     cfg, clip_op, generator, setting_name = get_objects(setting)
     cfg.setting = cfg.get('setting', setting_name)
