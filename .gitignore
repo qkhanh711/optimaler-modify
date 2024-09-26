@@ -4,6 +4,7 @@
 runs/
 runs_RegretNet/
 runs_RegretFormer/
+runs_EquivariantNet/
 __pycache__/
 logs/
 *.npy

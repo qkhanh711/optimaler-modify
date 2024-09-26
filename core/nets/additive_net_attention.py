@@ -1,8 +1,8 @@
 from torch import nn
 from torch.nn import functional as F
 
-from layers.blocks import AttentionHead, MHAttentionBody, MLPHead, PositionalEncoding
-from layers.exchangeable_layer import Exchangeable
+from core.layers.blocks import AttentionHead, MHAttentionBody, MLPHead, PositionalEncoding
+from core.layers.exchangeable_layer import Exchangeable
 from core.nets.additive_net import AdditiveNet
 
 

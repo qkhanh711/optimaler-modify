@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from layers.utility.scaledproduct import ScaledDotProductAttention
+from core.layers.utility.scaledproduct import ScaledDotProductAttention
 
 # From https://github.com/jadore801120/attention-is-all-you-need-pytorch
 

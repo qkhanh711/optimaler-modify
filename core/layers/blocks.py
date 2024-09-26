@@ -2,8 +2,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from layers.exchangeable_layer import Exchangeable
-from layers.mh_attention import MultiHeadAttention
+from core.layers.exchangeable_layer import Exchangeable
+from core.layers.mh_attention import MultiHeadAttention
 
 from math import log as mlog
 
@@ -27,7 +27,7 @@ class MHAttentionBody(nn.Module):
         x_agent, _ = self.attention_agent(x_agent)
         x_agent = x_agent.reshape(bs, ni, na, hid).permute(0, 2, 1, 3)
 
-        x = F.tanh(torch.cat([x_item, x_agent], dim=-1))
+        x = torch.tanh(torch.cat([x_item, x_agent], dim=-1))
         x = self.fc(x) + residual
         return x
 
