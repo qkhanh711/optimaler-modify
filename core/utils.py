@@ -28,25 +28,47 @@ def get_path_and_file(setting_path):
     path, file = os.path.split(setting_path)
     return path, os.path.splitext(file)[0]
 
-
+import sys
+# def get_objects(setting_path):
+#     '''
+#     Get objects from configuration file
+#     '''
+#     path, setting_name = get_path_and_file(setting_path)
+#     print(f"PATH: {path}")
+#     print(f"SETTING NAME: {setting_name}")
+#     import_obj = __import__(path, fromlist=[setting_name])
+#     cfg = getattr(import_obj, setting_name).cfg
+#     print(f"CFG: {cfg}")
+#     clip_op = CLIPS[cfg.distribution_type]
+#     print(f"CLIP OP: {clip_op}")
+#     generator = GENERATORS[cfg.distribution_type]
+#     # generator.save_data(iter =0)
+#     print(f"GENERATOR: {generator}")
+#     print()
+#     return cfg, clip_op, generator, setting_name
 def get_objects(setting_path):
     '''
     Get objects from configuration file
     '''
     path, setting_name = get_path_and_file(setting_path)
-    print(f"PATH: {path}")
-    print(f"SETTING NAME: {setting_name}")
-    import_obj = __import__(path, fromlist=[setting_name])
-    cfg = getattr(import_obj, setting_name).cfg
-    print(f"CFG: {cfg}")
-    clip_op = CLIPS[cfg.distribution_type]
-    print(f"CLIP OP: {clip_op}")
-    generator = GENERATORS[cfg.distribution_type]
-    # generator.save_data(iter =0)
-    print(f"GENERATOR: {generator}")
-    print()
+    
+    # Add the directory of the config to sys.path
+    sys.path.insert(0, path)
+    
+    try:
+        # Dynamically import the configuration module
+        import_obj = __import__(setting_name)
+        cfg = getattr(import_obj, 'cfg')
+        clip_op = CLIPS[cfg.distribution_type]
+        generator = GENERATORS[cfg.distribution_type]
+    except ImportError as e:
+        print(f"Error importing {setting_name} from {path}: {e}")
+        raise
+    finally:
+        # Remove the path from sys.path after import to avoid potential conflicts
+        sys.path.pop(0)
+    
     return cfg, clip_op, generator, setting_name
-
 
 def get_gpu_memory_map():
     """Get the current gpu usage.

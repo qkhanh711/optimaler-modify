@@ -18,7 +18,7 @@ __C.max = 1
 
 # Auction params
 
-__C.num_agents = 5 # bidders
+__C.num_agents = 9 # bidders
 __C.num_items = 3 # items
 
 

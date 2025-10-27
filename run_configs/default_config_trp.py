@@ -99,8 +99,8 @@ __C.train.gd_lr_step = 1
 
 """ Lagrange Optimization params """
 __C.train.w_rgt_init_val = 1
-__C.train.rgt_target_start = 0.01
-__C.train.rgt_target_end = 0.001
+__C.train.rgt_target_start = 0.001
+__C.train.rgt_target_end = 0.0001
 __C.train.rgt_lr = 0.5
 
 """ train summary and save params"""

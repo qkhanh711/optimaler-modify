@@ -290,7 +290,9 @@ class Trainer(object):
 
         time_elapsed = 0.0
 
-        while iteration < (self.config.train.max_iter):
+        # while iteration < (self.config.train.max_iter):
+        from tqdm import tqdm
+        for _ in tqdm(range(self.config.train.max_iter)):
             tic = time.time()
             train_revenue, train_regret, net_loss, self.w_rgt = self.train_epoch(iteration)
             results["revenue"].append(train_revenue.detach().cpu().numpy().item())
@@ -308,10 +310,10 @@ class Trainer(object):
                 self.save(iteration + 1)
 
             # Validation
-            if (iteration % self.config.val.print_iter) == 0:
-                self.train_gen.save_data(iteration)
-                self.val_gen.save_data(iteration)
-                self.eval(iteration)
+            # if (iteration % self.config.val.print_iter) == 0:
+            #     self.train_gen.save_data(iteration)
+            #     self.val_gen.save_data(iteration)
+            #     self.eval(iteration)
         saved_model_path = self.writer.log_dir + "/model_result_{}_{}x{}_{}".format(iteration, self.config.num_agents, self.config.num_items, self.config.train.rgt_target_end)
         print("Saving model to {}".format(saved_model_path))
         with open(saved_model_path, 'w') as f:

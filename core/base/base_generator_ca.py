@@ -59,15 +59,15 @@ class BaseGenerator(object):
         if self.config.save_data is None:
             return
 
-        if iter == 0:
-            np.save(os.path.join(self.config.dir_name, "X"), self.X)
-            np.save(os.path.join(self.config.dir_name, "C"), self.C)
-        else:
-            np.save(os.path.join(self.config.dir_name, "ADV_" + str(iter)), self.ADV)
+        # if iter == 0:
+        #     np.save(os.path.join(self.config.dir_name, "X"), self.X)
+        #     np.save(os.path.join(self.config.dir_name, "C"), self.C)
+        # else:
+        #     np.save(os.path.join(self.config.dir_name, "ADV_" + str(iter)), self.ADV)
 
     def gen_fixed(self):
         i = 0
-        if self.mode is "train":
+        if self.mode == "train":
             perm = np.random.permutation(self.num_instances)
         else:
             perm = np.arange(self.num_instances)

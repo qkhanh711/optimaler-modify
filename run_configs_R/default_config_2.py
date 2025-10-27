@@ -9,7 +9,7 @@ cfg = __C
 __C.regret_type = "standard"
 
 # Type of net - RegretNet, RegretFormer or EquivariantNet
-__C.architecture = "RegretFormer"
+__C.architecture = "RegretNet"
 
 # Bid distribution
 __C.distribution_type = "uniform_01"
@@ -18,7 +18,7 @@ __C.max = 1
 
 # Auction params
 
-__C.num_agents = 5 # bidders
+__C.num_agents = 7 # bidders
 __C.num_items = 3 # items
 
 
